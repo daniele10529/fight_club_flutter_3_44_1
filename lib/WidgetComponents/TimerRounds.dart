@@ -345,7 +345,7 @@ class TimerRounds extends State<TimerCounterPage>
   Widget buildButtons()
   {
     ///Verifica lo stato del timer
-    final isRunning = _timer == null ? false : _timer!.isActive;
+    final bool isRunning = _timer == null ? false : _timer!.isActive;
 
     ///Definisce lo stato del timer per lo start
     if (isRunning)
