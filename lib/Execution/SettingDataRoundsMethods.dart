@@ -1,6 +1,5 @@
 import 'package:fight_club/WidgetController/TimerCounterPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:fight_club/Execution/TimerRoundMethods.dart';
 
 ///Classe per la gestione del setting di SettingsDataRounds
@@ -139,9 +138,9 @@ class SettingDataRoundsMethods
     int _secTimerRest = int.parse(secTimerRest.text);
     int _rounds = int.parse(rounds.text);
     //Istanza alla classe TimerRoundsMethods
-    TimerRoundsMethods _timerRoundsMethods = new TimerRoundsMethods(_minTimerRound, _secTimerRound, _minTimerRest, _secTimerRest, _rounds);
+    SettingTimerRounds _settingTimerRounds = new SettingTimerRounds(_minTimerRound, _secTimerRound, _minTimerRest, _secTimerRest, _rounds);
     //Indirizza alla pagina del timer
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TimerCounterPage(_timerRoundsMethods)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => TimerCounterPage(_settingTimerRounds)));
   }
 
 }

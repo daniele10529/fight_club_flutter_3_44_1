@@ -8,10 +8,10 @@ class TimerCounterPage extends StatefulWidget
 {
 
   ///Istanza alla classe TimerRoundsMethods
-  late TimerRoundsMethods _timerRoundsMethods;
+  late SettingTimerRounds _timerRoundsMethods;
 
   ///Costruttore della classe
-  TimerCounterPage(TimerRoundsMethods timerRoundsMethods, {super.key})
+  TimerCounterPage(SettingTimerRounds timerRoundsMethods, {super.key})
   {
     _timerRoundsMethods = timerRoundsMethods;
   }
