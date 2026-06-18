@@ -1,6 +1,6 @@
 import 'package:fight_club/WidgetController/TimerCounterPage.dart';
 import 'package:flutter/material.dart';
-import 'package:fight_club/Execution/TimerRoundMethods.dart';
+import 'package:fight_club/Execution/SettingTimerRounds.dart';
 
 ///Classe per la gestione del setting di SettingsDataRounds
 class SettingDataRoundsMethods

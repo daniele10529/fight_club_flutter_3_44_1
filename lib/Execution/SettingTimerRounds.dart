@@ -23,5 +23,4 @@ class SettingTimerRounds
   int get secTimerRest => _secTimerRest;
   ///Getter per il numero di round
   int get rounds => _rounds;
-
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:fight_club/WidgetController/TimerCounterPage.dart';
-import 'package:fight_club/Execution/TimerRoundMethods.dart';
+import 'package:fight_club/Execution/SettingTimerRounds.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -150,11 +150,11 @@ class TimerRounds extends State<TimerCounterPage>
   }
 
   ///Metodo per ricavare il numero totale di secondi
-  int _convertToSeconds() {
+  int _convertToSeconds()
+  {
     //Inizializza i valori del timer
     int min = _minToDo; //int.parse(_txtTimerMinuts.text);
     int sec = _secToDo; //int.parse(_txtTimerSeconds.text);
-
     //Inizializza il valore da restituire
     int totalSeconds = (min * 60) + sec;
     //Restituisce il valore
@@ -187,7 +187,6 @@ class TimerRounds extends State<TimerCounterPage>
       status = "RECUPERO";
       return status;
     }
-
   }
 
   @override
@@ -252,7 +251,7 @@ class TimerRounds extends State<TimerCounterPage>
                                   _settingTimerRounds.rounds.toString(),
                               style: TextStyle(
                                 color: Color.fromARGB(255, 6, 53, 146),
-                                fontSize: 22,
+                                fontSize: 18,
                                 fontWeight: FontWeight(500)
                               ),
                             ),
@@ -270,8 +269,8 @@ class TimerRounds extends State<TimerCounterPage>
                         animation: true,
                         animateFromLastPercent: true,
                         animationDuration: _convertToSeconds() * 1000,
-                        radius: 150,
-                        lineWidth: 20,
+                        radius: 120,
+                        lineWidth: 10,
                         percent: _percent,
                         progressColor: Color.fromARGB(255, 10, 168, 225),
                         backgroundColor: Color.fromARGB(255, 36, 218, 93),
@@ -320,7 +319,7 @@ class TimerRounds extends State<TimerCounterPage>
                                       child: Text(_statusTraining(),
                                         style: TextStyle(
                                           color: Color.fromARGB(255, 6, 53, 146),
-                                          fontSize: 24,
+                                          fontSize: 20,
                                           fontWeight: FontWeight(900)
                                         ),
                                       ),
@@ -345,13 +344,10 @@ class TimerRounds extends State<TimerCounterPage>
   Widget buildButtons()
   {
     ///Verifica lo stato del timer
-    final bool isRunning = _timer == null ? false : _timer!.isActive;
+    final isRunning = _timer.isActive ?  true : false;
 
     ///Definisce lo stato del timer per lo start
-    if (isRunning)
-      _timerInRunning = true;
-    else
-      _timerInRunning = false;
+    _timerInRunning = isRunning ? true : false;
 
     return isRunning
         ? ///Restituisce il pulsante di pausa se timer in running
