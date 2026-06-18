@@ -5,24 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 ///classe per la costruzione del widget TimerRound
-class TimerRounds extends State<TimerCounterPage>
+class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
 {
 
   ///Istanza alla classe SettingTimerRounds
   SettingTimerRounds _settingTimerRounds;
-
-  ///Attributi privati
-  bool _timerInRunning = false;
-  bool _boxing = false;
-  bool _trainingCompleted = false;
-  late Timer _timer;
-  double _percent = 0.0;
-  bool _preStart = true;
-  int _roundDone = 0;
-  int seconds = 0;
-  double valToIncrease = 0.0;
-  int _minToDo = 0;
-  int _secToDo = 0;
 
   ///Costruttore della classe
   TimerRounds(this._settingTimerRounds)
@@ -32,19 +19,9 @@ class TimerRounds extends State<TimerCounterPage>
     _startTimer();
   }
 
-  ///Metodo per l'inizializzazione del prestart
-  void _initPreStart()
-  {
-    //Verifica che effettivamente sia il prestart
-    if (_preStart)
-    {
-      //Inizializza i valori del tempo di prestart
-      _minToDo = 0;
-      _secToDo = 10;
-    }
-  }
-
   ///Metodo per avviare il timer
+  ///Deve rimanere obbligatoriamente in questa classe
+  ///per lo stato del widget
   void _startTimer({bool resume = false})
   {
     //Se non è il restart del timer inizializza i valori
@@ -146,46 +123,6 @@ class TimerRounds extends State<TimerCounterPage>
           }
         });
       });
-    }
-  }
-
-  ///Metodo per ricavare il numero totale di secondi
-  int _convertToSeconds()
-  {
-    //Inizializza i valori del timer
-    int min = _minToDo; //int.parse(_txtTimerMinuts.text);
-    int sec = _secToDo; //int.parse(_txtTimerSeconds.text);
-    //Inizializza il valore da restituire
-    int totalSeconds = (min * 60) + sec;
-    //Restituisce il valore
-    return totalSeconds;
-  }
-
-  ///Metodo per la verifica dello stato del training
-  String _statusTraining()
-  {
-    String status = "";
-    //Verifica lo stato di prestart
-    if(_preStart)
-    {
-      status = "READY TO START";
-      return status;
-    }
-    if(_trainingCompleted)
-    {
-      status = "FINE ALLENAMENTO";
-      return status;
-    }
-    //Verifica lo stato di boxing
-    if(_boxing)
-    {
-      status = "BOXING";
-      return status;
-    }
-    else
-    {
-      status = "RECUPERO";
-      return status;
     }
   }
 
@@ -341,7 +278,9 @@ class TimerRounds extends State<TimerCounterPage>
   }
 
   ///Metodo Widget per la costruzione altenata dei pulsanti
-  Widget buildButtons()
+  ///Deve rimanere obbligatoriamente all'interno di questa classe
+  ///per lo stato del widget
+   Widget buildButtons()
   {
     ///Verifica lo stato del timer
     final isRunning = _timer.isActive ?  true : false;
@@ -422,5 +361,75 @@ class TimerRounds extends State<TimerCounterPage>
           );
   }
 
+}
 
+///Estensione della classe TimerRounds per i metodi
+///non può essere messa in un file diverso
+mixin TimerRoundsMethod
+{
+
+  ///Attributi privati
+  bool _timerInRunning = false;
+  bool _boxing = false;
+  bool _trainingCompleted = false;
+  late Timer _timer;
+  double _percent = 0.0;
+  bool _preStart = true;
+  int _roundDone = 0;
+  int seconds = 0;
+  double valToIncrease = 0.0;
+  int _minToDo = 0;
+  int _secToDo = 0;
+
+  ///Metodo per ricavare il numero totale di secondi
+  int _convertToSeconds()
+  {
+    //Inizializza i valori del timer
+    int min = _minToDo; //int.parse(_txtTimerMinuts.text);
+    int sec = _secToDo; //int.parse(_txtTimerSeconds.text);
+    //Inizializza il valore da restituire
+    int totalSeconds = (min * 60) + sec;
+    //Restituisce il valore
+    return totalSeconds;
+  }
+
+   ///Metodo per l'inizializzazione del prestart
+   void _initPreStart()
+  {
+    //Verifica che effettivamente sia il prestart
+    if (_preStart)
+    {
+      //Inizializza i valori del tempo di prestart
+      _minToDo = 0;
+      _secToDo = 10;
+    }
+  }
+
+  ///Metodo per la verifica dello stato del training
+  String _statusTraining()
+  {
+    String status = "";
+    //Verifica lo stato di prestart
+    if(_preStart)
+    {
+      status = "READY TO START";
+      return status;
+    }
+    if(_trainingCompleted)
+    {
+      status = "FINE ALLENAMENTO";
+      return status;
+    }
+    //Verifica lo stato di boxing
+    if(_boxing)
+    {
+      status = "BOXING";
+      return status;
+    }
+    else
+    {
+      status = "RECUPERO";
+      return status;
+    }
+  }
 }
