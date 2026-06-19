@@ -296,23 +296,35 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
             child: ButtonTheme(
               minWidth: 80,
               height: 80,
-              child: new ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 158, 234, 182),
-
-                  ///Definizione del bordo
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45),
-                    side: BorderSide(color: Colors.green, width: 2),
-                  ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(240, 76, 73, 73),
+                      blurRadius: 5,
+                      offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                onPressed: () {
-                  setState(() {
-                    //Mette in pausa il timer
-                    _timer.cancel();
-                  });
-                },
-                child: Icon(Icons.pause, size: 30),
+                child: new ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 158, 234, 182),
+                    shadowColor: Color.fromARGB(240, 30, 29, 29),
+                    ///Definizione del bordo
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(45),
+                      side: BorderSide(color: Colors.green, width: 2),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      //Mette in pausa il timer
+                      _timer.cancel();
+                    });
+                  },
+                  child: Icon(Icons.pause, size: 30),
+                ),
               ),
             ),
           )
@@ -323,39 +335,51 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
             child: ButtonTheme(
               minWidth: 80,
               height: 80,
-              child: new ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 158, 234, 182),
-
-                  ///Definizione del bordo
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(45),
-                    side: BorderSide(color: Colors.green, width: 2),
-                  ),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(240, 76, 73, 73),
+                      blurRadius: 5,
+                      offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                onPressed: () {
-                  //Verifica se l'allenamento è completato
-                  if(_trainingCompleted)
-                  {
-                    //Inizializza il numero di round
-                    _roundDone = 0;
-                    //Inizializza il prestart
-                    _preStart = true;
-                    //Risetta il completamento del training
-                    _trainingCompleted = false;
-                    //Inizializza i valori prestart
-                    _initPreStart();
-                    //Avvia il timer
-                    _startTimer();
-                  }
-                  //Altrimenti ripristina il timer
-                  else
-                  {
-                    //Ripristina il timer
-                    _startTimer(resume: true);
-                  }
-                },
-                child: Icon(Icons.play_arrow, size: 30),
+                child: new ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(255, 158, 234, 182),
+                    shadowColor: Color.fromARGB(240, 30, 29, 29),
+                    ///Definizione del bordo
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(45),
+                      side: BorderSide(color: Colors.green, width: 2),
+                    ),
+                  ),
+                  onPressed: () {
+                    //Verifica se l'allenamento è completato
+                    if(_trainingCompleted)
+                    {
+                      //Inizializza il numero di round
+                      _roundDone = 0;
+                      //Inizializza il prestart
+                      _preStart = true;
+                      //Risetta il completamento del training
+                      _trainingCompleted = false;
+                      //Inizializza i valori prestart
+                      _initPreStart();
+                      //Avvia il timer
+                      _startTimer();
+                    }
+                    //Altrimenti ripristina il timer
+                    else
+                    {
+                      //Ripristina il timer
+                      _startTimer(resume: true);
+                    }
+                  },
+                  child: Icon(Icons.play_arrow, size: 30),
+                ),
               ),
             ),
           );
