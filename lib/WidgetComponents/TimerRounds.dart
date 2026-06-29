@@ -3,6 +3,7 @@ import 'package:fight_club/WidgetController/TimerCounterPage.dart';
 import 'package:fight_club/Execution/SettingTimerRounds.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter/services.dart';
 
 ///classe per la costruzione del widget TimerRound
 class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
@@ -41,10 +42,10 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
     {
       //Setta il timer sullo stato avviato
       _timerInRunning = true;
-
       //Setta il timer
       _timer = Timer.periodic(Duration(seconds: 1), (timer)
       {
+
         //Aggiorna lo stato del widget
         setState(()
         {
@@ -68,6 +69,8 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
             {
               //Arresta il timer
               _timer.cancel();
+              //Avvia la riproduzione audio
+              _startSound();
               //Imposta lo stato
               _timerInRunning = false;
 
@@ -89,7 +92,7 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
                 //Riavvia il timer
                 _startTimer();
               }
-              //Altrimenti imposta i tempi di recuper
+              //Altrimenti imposta i tempi di recupero
               else
               {
                 //Verifica il numero di round
@@ -119,7 +122,6 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
                 }
               }
             }
-
           }
         });
       });
@@ -128,6 +130,8 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
 
   @override
   Widget build(BuildContext context) {
+
+    ///Area princiale della pagina
     return SafeArea(
       child: new Scaffold(
         ///Evita la barre di fondo in caso di layout verticale oltre la dimensione del display
@@ -164,8 +168,8 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
 
               ///Colonna principale
               child: Expanded(
-
                 child: Column(
+                  ///Allineamento degli assi
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
 
@@ -277,7 +281,7 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
     );
   }
 
-  ///Metodo Widget per la costruzione altenata dei pulsanti
+  ///Metodo Widget per la costruzione alternata dei pulsanti
   ///Deve rimanere obbligatoriamente all'interno di questa classe
   ///per lo stato del widget
    Widget buildButtons()
@@ -384,7 +388,6 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
             ),
           );
   }
-
 }
 
 ///Estensione della classe TimerRounds per i metodi
@@ -404,13 +407,34 @@ mixin TimerRoundsMethod
   double valToIncrease = 0.0;
   int _minToDo = 0;
   int _secToDo = 0;
+  String _testo = "";
+
+  /// Definisce il canale univoco per l'esecuzione del metodo in kotlin
+  static const platform = MethodChannel('com.daam/daam_channel');
+
+  /// Funzione per riprodurre il suono dal metodo in kotlin
+  Future<void> _startSound() async
+  {
+    try
+    {
+      //Ricava il risultato del response invocando il metodo
+      final String risultato = await platform.invokeMethod('startSound');
+      //Ricava il valore di response
+      _testo = risultato;
+    }
+    on PlatformException catch (e)
+    {//In caso si generi un'eccezione sul metodo
+      //rilascia il testo dell'werrore
+      _testo = "Errore: ${e.message}";
+    }
+  }
 
   ///Metodo per ricavare il numero totale di secondi
   int _convertToSeconds()
   {
     //Inizializza i valori del timer
-    int min = _minToDo; //int.parse(_txtTimerMinuts.text);
-    int sec = _secToDo; //int.parse(_txtTimerSeconds.text);
+    int min = _minToDo;
+    int sec = _secToDo;
     //Inizializza il valore da restituire
     int totalSeconds = (min * 60) + sec;
     //Restituisce il valore
@@ -433,12 +457,19 @@ mixin TimerRoundsMethod
   String _statusTraining()
   {
     String status = "";
+    //Verifica lo stato di errore nella riproduzione audio
+    if(!(_testo == "ok"))
+    {
+      status = _testo;
+      return status;
+    }
     //Verifica lo stato di prestart
     if(_preStart)
     {
       status = "READY TO START";
       return status;
     }
+    //Verifica lo stato di fine allenamento
     if(_trainingCompleted)
     {
       status = "FINE ALLENAMENTO";

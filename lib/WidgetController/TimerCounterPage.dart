@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fight_club/Execution/SettingTimerRounds.dart';
 
-///Classe controller del Widget che restituisce le Views per l'homepage
+///Classe controller del Widget che restituisce le Views per la Timer Page
 class TimerCounterPage extends StatefulWidget
 {
 
-  ///Istanza alla classe TimerRoundsMethods
+  ///Istanza alla classe SettingTimerRounds
   late final SettingTimerRounds _timerRoundsMethods;
 
   ///Costruttore della classe

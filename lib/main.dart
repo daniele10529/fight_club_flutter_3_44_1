@@ -16,5 +16,4 @@ void main()
     title: "FightClub",
     home: new HomePage(),
   ));
-
 }

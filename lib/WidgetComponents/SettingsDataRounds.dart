@@ -13,7 +13,7 @@ class SettingsDataRounds extends State<HomePage>
   TextEditingController _secTimerRest = new TextEditingController();
   TextEditingController _rounds = new TextEditingController();
 
-  ///Istanza alle classi
+  ///Istanza alla classe SettingDataRoundsMethods
   SettingDataRoundsMethods _settingDataRoundsMethods  = new SettingDataRoundsMethods();
 
   ///Costruttore della classe
@@ -66,7 +66,9 @@ class SettingsDataRounds extends State<HomePage>
           ),
 
           ///Colonna principale
-          child:  Expanded(child: Column(
+          child:
+          Expanded(child:
+          Column(
 
             //Widget della colonna
             children: <Widget>[
@@ -169,6 +171,7 @@ class SettingsDataRounds extends State<HomePage>
                           ),
                           child: ElevatedButton(
                             onPressed: (){
+                              //Incrementa il tempo di round
                               _settingDataRoundsMethods.incriseTimerRound(_minTimerRound, _secTimerRound);
                             },
                             style: ElevatedButton.styleFrom(
@@ -203,6 +206,7 @@ class SettingsDataRounds extends State<HomePage>
                           ),
                           child: ElevatedButton(
                             onPressed: (){
+                              //Decrementa il tempo di round
                               _settingDataRoundsMethods.decriseTimerRound(_minTimerRound, _secTimerRound);
                             },
                             style: ElevatedButton.styleFrom(
@@ -231,7 +235,11 @@ class SettingsDataRounds extends State<HomePage>
                 margin: EdgeInsets.only(top: 10),
                 child: new Center(
                   child: Text("TEMPO DI RECUPERO",
-                    style: TextStyle(color: Color.fromARGB(255, 4, 50, 50),fontSize: 14),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 152, 4, 23),
+                        fontSize: 14,
+                        fontWeight: FontWeight(700)
+                    ),
                   ),
                 ),
               ),
@@ -259,7 +267,12 @@ class SettingsDataRounds extends State<HomePage>
                           controller: _minTimerRest,
                           readOnly: true,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Color.fromARGB(255, 6, 53, 146),fontSize: 20,fontFamily: "Rubik-SemiBold"),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 6, 53, 146),
+                              fontSize: 20,
+                              fontFamily: "Rubik-SemiBold",
+                              fontWeight: FontWeight(700)
+                          ),
                         ),
                       ),
                     ),
@@ -269,7 +282,7 @@ class SettingsDataRounds extends State<HomePage>
                       margin: EdgeInsets.only(top: 5, left: 30),
                       child: new SizedBox(
                         width: 30,
-                        height: 30,
+                        height: 35,
                         child: Text(":", style: TextStyle(color: Color.fromARGB(
                             200, 1, 23, 24),fontSize: 30),
                         ),
@@ -286,7 +299,12 @@ class SettingsDataRounds extends State<HomePage>
                           controller: _secTimerRest,
                           readOnly: true,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Color.fromARGB(255, 6, 53, 146),fontSize: 20,fontFamily: "Rubik-SemiBold"),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 6, 53, 146),
+                              fontSize: 20,
+                              fontFamily: "Rubik-SemiBold",
+                              fontWeight: FontWeight(700)
+                          ),
                         ),
                       ),
                     ),
@@ -297,18 +315,30 @@ class SettingsDataRounds extends State<HomePage>
                       child: ButtonTheme(
                         minWidth: 20.0,
                         height: 40.0,
-                        child: ElevatedButton(
-                          onPressed: (){
-                            _settingDataRoundsMethods.upTimerRest(_minTimerRest, _secTimerRest);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 175, 172, 172),
+                                blurRadius: 10,
+                                offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                              ),
+                            ],
                           ),
-                          child: Text("+",
-                            style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 14),
+                          child: ElevatedButton(
+                            onPressed: (){
+                              //Incrementa il tempo di riposo
+                              _settingDataRoundsMethods.upTimerRest(_minTimerRest, _secTimerRest);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                            ),
+                            child: Text("+",
+                              style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 14),
+                            ),
                           ),
                         ),
                       ),
@@ -320,18 +350,30 @@ class SettingsDataRounds extends State<HomePage>
                       child: ButtonTheme(
                         minWidth: 20.0,
                         height: 40.0,
-                        child: ElevatedButton(
-                          onPressed: (){
-                            _settingDataRoundsMethods.decriseTimerRest(_minTimerRest, _secTimerRest);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 175, 172, 172),
+                                blurRadius: 10,
+                                offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                              ),
+                            ],
                           ),
-                          child: Text("-",
-                            style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 16),
+                          child: ElevatedButton(
+                            onPressed: (){
+                              //Decrementa il tempo di riposo
+                              _settingDataRoundsMethods.decriseTimerRest(_minTimerRest, _secTimerRest);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                            ),
+                            child: Text("-",
+                              style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
@@ -348,7 +390,11 @@ class SettingsDataRounds extends State<HomePage>
                 margin: EdgeInsets.only(top: 10),
                 child: new Center(
                   child: Text("NUMERO DI ROUND",
-                    style: TextStyle(color: Color.fromARGB(255, 4, 50, 50),fontSize: 14),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 152, 4, 23),
+                        fontSize: 14,
+                        fontWeight: FontWeight(700)
+                    ),
                   ),
                 ),
               ),
@@ -376,7 +422,12 @@ class SettingsDataRounds extends State<HomePage>
                           controller: _rounds,
                           readOnly: true,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Color.fromARGB(255, 6, 53, 146),fontSize: 20,fontFamily: "Rubik-SemiBold"),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 6, 53, 146),
+                              fontSize: 20,
+                              fontFamily: "Rubik-SemiBold",
+                              fontWeight: FontWeight(700)
+                          ),
                         ),
                       ),
                     ),
@@ -387,18 +438,30 @@ class SettingsDataRounds extends State<HomePage>
                       child: ButtonTheme(
                         minWidth: 20.0,
                         height: 40.0,
-                        child: ElevatedButton(
-                          onPressed: (){
-                            _settingDataRoundsMethods.incriseRound(_rounds);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 175, 172, 172),
+                                blurRadius: 10,
+                                offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                              ),
+                            ],
                           ),
-                          child: Text("+",
-                            style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 14),
+                          child: ElevatedButton(
+                            onPressed: (){
+                              //Incrementa i round
+                              _settingDataRoundsMethods.incriseRound(_rounds);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                            ),
+                            child: Text("+",
+                              style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 14),
+                            ),
                           ),
                         ),
                       ),
@@ -410,18 +473,30 @@ class SettingsDataRounds extends State<HomePage>
                       child: ButtonTheme(
                         minWidth: 20.0,
                         height: 40.0,
-                        child: ElevatedButton(
-                          onPressed: (){
-                            _settingDataRoundsMethods.decriseRound(_rounds);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 175, 172, 172),
+                                blurRadius: 10,
+                                offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                              ),
+                            ],
                           ),
-                          child: Text("-",
-                            style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 16),
+                          child: ElevatedButton(
+                            onPressed: (){
+                              //Decrementa i round
+                              _settingDataRoundsMethods.decriseRound(_rounds);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: Color.fromARGB(255, 233, 239, 236),
+                            ),
+                            child: Text("-",
+                              style: TextStyle(color: Color.fromARGB(255, 255, 0, 0),fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
@@ -436,53 +511,64 @@ class SettingsDataRounds extends State<HomePage>
               ///Contenitore del play
               Container(
                 margin: EdgeInsets.only(top: 30, right: 2, left: 2),
-                height: 150,
+                height: 130,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(120, 31, 92, 3),
                   borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(120, 31, 92, 3),
+                        Color.fromARGB(255, 6, 181, 98),
+                      ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight
+                  )
                 ),
                 //Contenitore del pulsante
-                child: new Center(
+                child: Center(
                   //Button
                   child: ButtonTheme(
-                      minWidth: 80,
-                      height: 80,
-                      child: new ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 88, 107, 201),
-                          // Definizione del bordo
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(45),
-                            side: BorderSide(color: Colors.green, width: 2),
-                          ),
+                      minWidth: 20,
+                      height: 20,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 166, 243, 166),
+                              blurRadius: 30,
+                              offset: const Offset(1, 5), // Spostamento dell'ombra (X, Y)
+                            ),
+                          ],
                         ),
-
-                        onPressed: () {
-                          _settingDataRoundsMethods.goTo(_minTimerRound, _secTimerRound, _minTimerRest, _secTimerRest, _rounds, context);
-                        },
-                        child: Text("GO!",
-                          style: TextStyle(color: Color.fromARGB(
-                              255, 203, 208, 241),fontSize: 14),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromARGB(255, 174, 184, 232),
+                            // Definizione del bordo
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(45),
+                              side: BorderSide(color: Colors.green, width: 2),
+                            ),
+                          ),
+                          onPressed: () {
+                            //Indirizza alla pagina del timer
+                            _settingDataRoundsMethods
+                                .goTo(_minTimerRound, _secTimerRound, _minTimerRest,
+                                _secTimerRest, _rounds, context);
+                          },
+                          child: Text("START",
+                            style: TextStyle(color: Color.fromARGB(
+                                255, 1, 15, 110),fontSize: 14),
+                          ),
                         ),
                       )
                   ),
                 ),
               ),
-
             ],
-
           ),
-
-
-
           ),
-
-
         ),
-
       ),
     );
-
   }
-
 }

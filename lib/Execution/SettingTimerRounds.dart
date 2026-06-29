@@ -1,4 +1,3 @@
-
 ///Classe per la gestione dei metodi del widget TimerRound
 class SettingTimerRounds
 {

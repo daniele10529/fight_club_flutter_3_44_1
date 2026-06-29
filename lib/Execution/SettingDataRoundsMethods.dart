@@ -47,13 +47,11 @@ class SettingDataRoundsMethods
         //Decrementa il minuto
         min--;
       }
-
       //Assegna il valore al controller dei minuti
       minTimerRound.text = min.toString();
       //Assegna il valore al controller dei secondi
       secTimerRound.text = sec.toString();
     }
-
   }
 
   ///Metodo per incrementare il timer del riposo
@@ -98,7 +96,6 @@ class SettingDataRoundsMethods
         //Decrementa il minuto
         min--;
       }
-
       //Assegna il valore al controller dei minuti
       minTimerRest.text = min.toString();
       //Assegna il valore al controller dei secondi
@@ -129,7 +126,7 @@ class SettingDataRoundsMethods
   }
 
   ///Metodo per indirizzare alla pagina di esecuzione del timer
-  void goTo(TextEditingController minTimerRound, TextEditingController secTimerRound,TextEditingController minTimerRest, TextEditingController secTimerRest,TextEditingController rounds, BuildContext context)
+   void goTo(TextEditingController minTimerRound, TextEditingController secTimerRound,TextEditingController minTimerRest, TextEditingController secTimerRest,TextEditingController rounds, BuildContext context)
   {
     //Inizializza i parametri da passare all'oggetto TimerRoundsMethods
     int _minTimerRound = int.parse(minTimerRound.text);
@@ -137,10 +134,60 @@ class SettingDataRoundsMethods
     int _minTimerRest = int.parse(minTimerRest.text);
     int _secTimerRest = int.parse(secTimerRest.text);
     int _rounds = int.parse(rounds.text);
-    //Istanza alla classe TimerRoundsMethods
-    SettingTimerRounds _settingTimerRounds = new SettingTimerRounds(_minTimerRound, _secTimerRound, _minTimerRest, _secTimerRest, _rounds);
-    //Indirizza alla pagina del timer
-    Navigator.push(context, MaterialPageRoute(builder: (context) => TimerCounterPage(_settingTimerRounds)));
-  }
+    
+    //Verifica che ci siano tutti i campi impostati per avviare il timer
+    bool timeSetting = _minTimerRound == 0 && _secTimerRound == 0 ? false : true;
+    bool restSetting = _minTimerRest == 0 && _secTimerRest == 0 ? false : true;
+    bool roundsSetting = _rounds == 0 ? false : true;
+    bool readyToGo = timeSetting && restSetting && roundsSetting ? true : false;
 
+    //Se tutti i campo sono impostati indirizza alla pagina del timer
+    if(readyToGo)
+    {
+      //Istanza alla classe SettingTimerRounds
+      SettingTimerRounds _settingTimerRounds =
+      new SettingTimerRounds(
+          _minTimerRound, _secTimerRound, _minTimerRest, _secTimerRest, _rounds);
+      //Indirizza alla pagina del timer
+      Navigator.push(context,
+          MaterialPageRoute(builder:
+              (context) => TimerCounterPage(_settingTimerRounds)));
+    }
+    else
+    {
+      //Altrimenti apre un allert dialog con il warning
+      showDialog(context: context, builder: (BuildContext context)
+        => AlertDialog(
+          //Titolo del dialog
+            title: Text("WARNING",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 152, 4, 23),
+                  fontSize: 14,
+                  fontWeight: FontWeight(700)
+              ),
+              textAlign: TextAlign.center,
+            ),
+            //Contenuto del dialog
+            content: Text("Tutti i campi devono essere completati per avviare il timer",
+              style: TextStyle(
+                  color: Color.fromARGB(255, 45, 7, 101),
+                  fontSize: 14,
+                  fontWeight: FontWeight(700)
+              ),
+              textAlign: TextAlign.justify,
+            ),
+            //Pulsante del dialog
+            actions: [
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  //Chiude il Dialog
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          )
+      );
+    }
+  }
 }
