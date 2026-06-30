@@ -67,7 +67,6 @@ class SettingsDataRounds extends State<HomePage>
 
           ///Colonna principale
           child:
-          Expanded(child:
           Column(
 
             //Widget della colonna
@@ -79,9 +78,9 @@ class SettingsDataRounds extends State<HomePage>
                 child: Center(
                   child: Text("TEMPO DEL ROUND",
                     style: TextStyle(
-                      color: Color.fromARGB(255, 152, 4, 23),
-                      fontSize: 14,
-                      fontWeight: FontWeight(700)
+                        color: Color.fromARGB(255, 152, 4, 23),
+                        fontSize: 14,
+                        fontWeight: FontWeight(700)
                     ),
                   ),
                 ),
@@ -128,7 +127,7 @@ class SettingsDataRounds extends State<HomePage>
                         child: Text(":", style: TextStyle(color: Color.fromARGB(200, 1, 23, 24),
                             fontSize: 25,
                             fontWeight: FontWeight(700)
-                          ),
+                        ),
                         ),
                       ),
                     ),
@@ -513,16 +512,16 @@ class SettingsDataRounds extends State<HomePage>
                 margin: EdgeInsets.only(top: 30, right: 2, left: 2),
                 height: 130,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(120, 31, 92, 3),
-                  borderRadius: BorderRadius.circular(10.0),
-                  gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(120, 31, 92, 3),
-                        Color.fromARGB(255, 6, 181, 98),
-                      ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight
-                  )
+                    color: Color.fromARGB(120, 31, 92, 3),
+                    borderRadius: BorderRadius.circular(10.0),
+                    gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(120, 31, 92, 3),
+                          Color.fromARGB(255, 6, 181, 98),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight
+                    )
                 ),
                 //Contenitore del pulsante
                 child: Center(
@@ -565,7 +564,6 @@ class SettingsDataRounds extends State<HomePage>
                 ),
               ),
             ],
-          ),
           ),
         ),
       ),

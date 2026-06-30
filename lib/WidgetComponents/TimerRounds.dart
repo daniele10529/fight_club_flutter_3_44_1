@@ -17,6 +17,7 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
   {
     //Inizializza il prestart
     _initPreStart();
+    //Avvia il timer
     _startTimer();
   }
 
@@ -167,115 +168,109 @@ class TimerRounds extends State<TimerCounterPage> with TimerRoundsMethod
               width: double.infinity,
 
               ///Colonna principale
-              child: Expanded(
-                child: Column(
-                  ///Allineamento degli assi
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                ///Allineamento degli assi
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
 
-                  ///Elementi della colonna
-                  children: [
+                ///Elementi della colonna
+                children: [
 
-                    ///Colonna dei round
-                    Padding(
-                      padding: EdgeInsets.only(top: 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            alignment: Alignment.topRight,
-                            margin: EdgeInsets.only(top: 15, right: 15),
-                            child: Text(
-                              "ROUNDS:   " +
-                                  _roundDone.toString() +
-                                  " \\ " +
-                                  _settingTimerRounds.rounds.toString(),
-                              style: TextStyle(
+                  ///Colonna dei round
+                  Padding(
+                    padding: EdgeInsets.only(top: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          alignment: Alignment.topRight,
+                          margin: EdgeInsets.only(top: 15, right: 15),
+                          child: Text(
+                            "ROUNDS:   " +
+                                _roundDone.toString() +
+                                " \\ " +
+                                _settingTimerRounds.rounds.toString(),
+                            style: TextStyle(
                                 color: Color.fromARGB(255, 6, 53, 146),
                                 fontSize: 18,
                                 fontWeight: FontWeight(500)
-                              ),
                             ),
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  ///Contenitore di separazione
+                  SizedBox(height: 25),
+
+                  ///Indicatore circolare del timer
+                  Container(
+                    child: CircularPercentIndicator(
+                      animation: true,
+                      animateFromLastPercent: true,
+                      animationDuration: _convertToSeconds() * 1000,
+                      radius: 120,
+                      lineWidth: 10,
+                      percent: _percent,
+                      progressColor: Color.fromARGB(255, 10, 168, 225),
+                      backgroundColor: Color.fromARGB(255, 36, 218, 93),
+                      circularStrokeCap: CircularStrokeCap.round,
+                      center:
+                      ///Testo interno all'indicatore
+                      Text(
+                        "$_minToDo : $_secToDo",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 6, 53, 146),
+                          fontSize: 40,
+                          fontFamily: "Rubik-SemiBold",
+                        ),
                       ),
                     ),
+                  ),
 
-                    ///Contenitore di separazione
-                    SizedBox(height: 25),
+                  ///Pulsante di play \ pause
+                  Container(
+                    margin: EdgeInsets.only(top: 55),
 
-                    ///Indicatore circolare del timer
-                    Expanded(
-                      child: CircularPercentIndicator(
-                        animation: true,
-                        animateFromLastPercent: true,
-                        animationDuration: _convertToSeconds() * 1000,
-                        radius: 120,
-                        lineWidth: 10,
-                        percent: _percent,
-                        progressColor: Color.fromARGB(255, 10, 168, 225),
-                        backgroundColor: Color.fromARGB(255, 36, 218, 93),
-                        circularStrokeCap: CircularStrokeCap.round,
-                        center:
-                            ///Testo interno all'indicatore
-                            Text(
-                              "$_minToDo : $_secToDo",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 6, 53, 146),
-                                fontSize: 40,
-                                fontFamily: "Rubik-SemiBold",
-                              ),
-                            ),
-                      ),
-                    ),
-
-                    ///Pulsante di play \ pause
-                    Expanded(
-                      ///Contenitore dei pulsanti
-                      child: Container(
-                        margin: EdgeInsets.only(top: 55),
-
-                        ///Colonna dei pulsanti
-                        child: Expanded(
+                    ///Colonna dei pulsanti
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ///Riga dei pulsanti
+                        Row(
+                          children: [
+                            ///Restituisce il pulsante in baso allo stato
+                            ///del timer
+                            buildButtons(),
+                          ],
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 25),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ///Riga dei pulsanti
-                              Row(
-                                children: [
-                                  ///Restituisce il pulsante in baso allo stato
-                                  ///del timer
-                                  buildButtons(),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 25),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      margin: EdgeInsets.only(top: 15),
-                                      child: Text(_statusTraining(),
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 6, 53, 146),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight(900)
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.only(top: 15),
+                                child: Text(_statusTraining(),
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 6, 53, 146),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight(900)
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+
             ),
       ),
     );
